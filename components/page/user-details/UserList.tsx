@@ -14,17 +14,15 @@ const UserList = () => {
     dispatch(showUsers());
   }, [dispatch]);
 
+  if (loading) return <Loading />;
+
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="grid grid-cols-4 gap-5 px-10 my-10">
-          {users?.map((item) => (
-            <UserDetailCard key={item?.id} userDetails={item} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-4 gap-5 px-10 my-10">
+        {users?.map((item) => (
+          <UserDetailCard key={item?.id} userDetails={item} />
+        ))}
+      </div>
     </>
   );
 };
