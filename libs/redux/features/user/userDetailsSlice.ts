@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createUser, deleteUser, showUsers } from "./actions";
+import { createUser, deleteUser, showUsers, editUser } from "./actions";
 
 interface User {
   id: string;
@@ -64,6 +64,23 @@ export const userDetail = createSlice({
       .addCase(deleteUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to delete user";
+      })
+      .addCase(editUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editUser.fulfilled, (state, action: PayloadAction<User>) => {
+        state.loading = false;
+        const updatedUser = action.payload;
+        const index = state.users.findIndex(
+          (user) => user.id === updatedUser.id
+        );
+        if (index !== -1) {
+          state.users[index] = updatedUser;
+        }
+      })
+      .addCase(editUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to edit user";
       });
   },
 });

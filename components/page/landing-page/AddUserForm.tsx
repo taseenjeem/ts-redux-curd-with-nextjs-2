@@ -9,6 +9,7 @@ const AddUserForm = () => {
   const { loading } = useSelector((state: RootState) => state.users);
 
   const initialFormData = {
+    id: "",
     name: "",
     email: "",
     age: "",
