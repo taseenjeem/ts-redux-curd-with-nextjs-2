@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/components/global/Loading";
-import UserDetailCard from "@/components/global/UserDetailCard";
+import UserDetailCard from "@/components/page/user-details/UserDetailCard";
 import { showUsers } from "@/libs/redux/features/user/actions";
 import { AppDispatch, RootState } from "@/libs/redux/store";
 import { useEffect } from "react";

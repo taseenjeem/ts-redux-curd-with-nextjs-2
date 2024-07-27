@@ -24,7 +24,6 @@ export const createUser = createAsyncThunk(
       }
 
       const result = await response.json();
-
       return result;
     } catch (error) {
       return rejectWithValue(
@@ -46,6 +45,27 @@ export const showUsers = createAsyncThunk(
 
       const result = await response.json();
       return result;
+    } catch (error) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Koite parlam na bhai 😭"
+      );
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "userDetail/deleteUser",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${API_URL}/${userId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      return userId;
     } catch (error) {
       return rejectWithValue(
         error instanceof Error ? error.message : "Koite parlam na bhai 😭"

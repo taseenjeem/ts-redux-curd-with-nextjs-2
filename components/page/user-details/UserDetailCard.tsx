@@ -1,4 +1,6 @@
 import React from "react";
+import EditBtn from "./EditBtn";
+import DeleteBtn from "./DeleteBtn";
 
 interface User {
   id: string;
@@ -20,8 +22,8 @@ const UserDetailCard: React.FC<UserDetailCardProps> = ({ userDetails }) => {
       <p>Age: {userDetails.age}</p>
       <p>Gender: {userDetails.gender}</p>
       <div className="flex justify-end space-x-3">
-        <button className="p-2 bg-blue-500 rounded-lg text-white">Edit</button>
-        <button className="p-2 bg-red-500 rounded-lg text-white">Delete</button>
+        <EditBtn userDetails={userDetails} />
+        <DeleteBtn userId={userDetails.id} />
       </div>
     </div>
   );

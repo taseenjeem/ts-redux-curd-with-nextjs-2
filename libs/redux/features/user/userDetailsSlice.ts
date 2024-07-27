@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createUser, showUsers } from "./actions";
+import { createUser, deleteUser, showUsers } from "./actions";
 
 interface User {
   id: string;
@@ -52,6 +52,18 @@ export const userDetail = createSlice({
       .addCase(showUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to load users";
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteUser.fulfilled, (state, action: PayloadAction<string>) => {
+        state.loading = false;
+        const userId = action.payload;
+        state.users = state.users.filter((user) => user.id !== userId);
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to delete user";
       });
   },
 });
