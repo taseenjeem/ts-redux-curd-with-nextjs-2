@@ -1,13 +1,20 @@
 "use client";
+import { createUser } from "@/libs/redux/features/user/actions";
+import { AppDispatch } from "@/libs/redux/store";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const AddUserForm = () => {
-  const [formData, setFormData] = useState({
+  const dispatch = useDispatch<AppDispatch>();
+
+  const initialFormData = {
     name: "",
     email: "",
     age: "",
     gender: "",
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,10 +24,19 @@ const AddUserForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log("Form Data:", formData);
+    try {
+      await dispatch(createUser(formData));
+      alert("User created successfully!");
+      setFormData(initialFormData);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`Failed to create user: ${error.message}`);
+      } else {
+        alert("An unexpected error occurred");
+      }
+    }
   };
 
   return (
