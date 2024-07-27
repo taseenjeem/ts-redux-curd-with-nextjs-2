@@ -15,7 +15,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href={`/`}
+              href={`/all-humans`}
               className="bg-blue-300 py-2 px-3 rounded-md hover:bg-blue-900 hover:text-white duration-300"
             >
               Show all humans

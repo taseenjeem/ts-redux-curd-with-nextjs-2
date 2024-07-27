@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createUser } from "./actions";
+import { createUser, showUsers } from "./actions";
 
 interface User {
   id: string;
@@ -40,7 +40,18 @@ export const userDetail = createSlice({
       })
       .addCase(createUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.error.message || "Failed to create user";
+      })
+      .addCase(showUsers.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(showUsers.fulfilled, (state, action: PayloadAction<User[]>) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
+      .addCase(showUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to load users";
       });
   },
 });
