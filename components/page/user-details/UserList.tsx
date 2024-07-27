@@ -18,11 +18,19 @@ const UserList = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-5 px-10 my-10">
-        {users?.map((item) => (
-          <UserDetailCard key={item?.id} userDetails={item} />
-        ))}
-      </div>
+      {users.length <= 0 ? (
+        <div className="min-h-screen w-full flex items-center justify-center">
+          <h1 className="text-3xl font-bold">
+            There are noooo humans😭!! Please add some humans
+          </h1>
+        </div>
+      ) : (
+        <div className="grid grid-cols-4 gap-5 px-10 my-10">
+          {users?.map((item) => (
+            <UserDetailCard key={item?.id} userDetails={item} />
+          ))}
+        </div>
+      )}
     </>
   );
 };
