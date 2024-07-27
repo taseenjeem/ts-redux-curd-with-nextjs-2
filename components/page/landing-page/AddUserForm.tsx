@@ -1,11 +1,12 @@
 "use client";
 import { createUser } from "@/libs/redux/features/user/actions";
-import { AppDispatch } from "@/libs/redux/store";
+import { AppDispatch, RootState } from "@/libs/redux/store";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddUserForm = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const { loading } = useSelector((state: RootState) => state.users);
 
   const initialFormData = {
     name: "",
@@ -91,12 +92,21 @@ const AddUserForm = () => {
           />
         </div>
       </div>
-      <button
-        type="submit"
-        className="bg-blue-300 w-full p-3 rounded-md hover:bg-blue-900 hover:text-white duration-300 mt-10"
-      >
-        Submit
-      </button>
+      {loading ? (
+        <button
+          disabled
+          className="bg-blue-300 w-full p-3 rounded-md hover:bg-blue-900 hover:text-white duration-300 mt-10"
+        >
+          Loading...
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className="bg-blue-300 w-full p-3 rounded-md hover:bg-blue-900 hover:text-white duration-300 mt-10"
+        >
+          Submit
+        </button>
+      )}
     </form>
   );
 };
