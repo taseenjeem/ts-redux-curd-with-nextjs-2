@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AllUsersBtn from "./AllUsersBtn";
 
 const Navbar = () => {
   return (
@@ -14,12 +15,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href={`/all-humans`}
-              className="bg-blue-300 py-2 px-3 rounded-md hover:bg-blue-900 hover:text-white duration-300"
-            >
-              Show all humans
-            </Link>
+            <AllUsersBtn />
           </li>
         </ul>
       </div>
