@@ -3,6 +3,7 @@ import { createUser } from "@/libs/redux/features/user/actions";
 import { AppDispatch, RootState } from "@/libs/redux/store";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AddUserForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,7 +31,7 @@ const AddUserForm = () => {
     e.preventDefault();
     try {
       await dispatch(createUser(formData));
-      alert("User created successfully!");
+      toast.success("Human added successfully 👍🏽");
       setFormData(initialFormData);
     } catch (error) {
       if (error instanceof Error) {

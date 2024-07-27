@@ -3,6 +3,7 @@ import { RootState, AppDispatch } from "@/libs/redux/store";
 import { editUser } from "@/libs/redux/features/user/actions";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 interface User {
   id: string;
@@ -33,6 +34,7 @@ const EditBtn: React.FC<EditBtnProps> = ({ userDetails }) => {
     e.preventDefault();
     dispatch(editUser(formData));
     setOpenModal(false);
+    toast.success("Human Edited 👍🏽");
   };
 
   return (
